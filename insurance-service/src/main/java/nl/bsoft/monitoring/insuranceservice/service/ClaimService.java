@@ -36,6 +36,6 @@ public class ClaimService {
             LOGGER.error(e.getMessage());
         }
 
-        return claimMap.get(customerId);
+        return claimMap.get(customerId % claimMap.values().size());
     }
 }

@@ -36,6 +36,6 @@ public class PolicyService {
             LOGGER.error(e.getMessage());
         }
 
-        return policyMap.get(customerId);
+        return policyMap.get(customerId % policyMap.values().size()); // Always map on existing policy
     }
 }

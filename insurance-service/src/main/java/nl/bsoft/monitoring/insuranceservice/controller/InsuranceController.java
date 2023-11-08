@@ -3,8 +3,6 @@ package nl.bsoft.monitoring.insuranceservice.controller;
 import lombok.extern.slf4j.Slf4j;
 import nl.bsoft.monitoring.insuranceservice.service.ClaimService;
 import nl.bsoft.monitoring.insuranceservice.service.PolicyService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/")
 public class InsuranceController {
-
     private final PolicyService policyService;
     private final ClaimService claimService;
     @Value("${spring.application.name}")

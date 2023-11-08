@@ -2,7 +2,13 @@
 
 ## Introduction
 
-The Insurance Service project is a demo project built using Spring Boot 3.1 and Java 17. It showcases the usage of Micrometer, Web, and OpenTelemetry dependencies to implement distributed tracing in a microservice application. The project contains two GET endpoints: `/policy` and `/claim`, both requiring a path parameter `id` representing the customer ID. As this is a demo project, static maps are used for Policy and Claim data instead of fetching them from a database. The `dev.knowledgecafe` package includes the `InsuranceController` class, defining the endpoints, and the `ClaimService` and `PolicyService` classes, responsible for searching claims and policies based on the provided ID. If no matching records are found, the services return null.
+The Insurance Service project is a demo project built using Spring Boot 3.1 and Java 17. It showcases the usage of
+Micrometer, Web, and OpenTelemetry dependencies to implement distributed tracing in a microservice application. The
+project contains two GET endpoints: `/policy` and `/claim`, both requiring a path parameter `id` representing the
+customer ID. As this is a demo project, static maps are used for Policy and Claim data instead of fetching them from a
+database. The `dev.knowledgecafe` package includes the `InsuranceController` class, defining the endpoints, and
+the `ClaimService` and `PolicyService` classes, responsible for searching claims and policies based on the provided ID.
+If no matching records are found, the services return null.
 
 ## Project Structure
 
@@ -45,7 +51,8 @@ To run the Insurance Service application:
 
 4. Run the `InsuranceServiceApplication` class as a Java application to start the Spring Boot application.
 
-5. The application will start, and the endpoints `/policy` and `/claim` will be accessible on the specified port (default is 8080).
+5. The application will start, and the endpoints `/policy` and `/claim` will be accessible on the specified port (
+   default is 8080).
 
 ## Endpoints
 
@@ -55,12 +62,17 @@ The Insurance Service application exposes two endpoints:
 
 2. `/claim/{id}`: Retrieves claim details based on the provided customer ID.
 
-Both endpoints require a valid customer ID as a path parameter. If the requested policy or claim is found, the application will return the relevant data. Otherwise, it will return null.
+Both endpoints require a valid customer ID as a path parameter. If the requested policy or claim is found, the
+application will return the relevant data. Otherwise, it will return null.
 
 ## Distributed Tracing
 
-The project demonstrates the implementation of distributed tracing using OpenTelemetry. The `OtlpConfig.java` class defines a bean to export traces and spans from endpoint URLs, allowing you to monitor the trace flow across services.
+The project demonstrates the implementation of distributed tracing using OpenTelemetry. The `OtlpConfig.java` class
+defines a bean to export traces and spans from endpoint URLs, allowing you to monitor the trace flow across services.
 
 ## Conclusion
 
-The Insurance Service project is a demo application illustrating the implementation of distributed tracing using OpenTelemetry in Spring Boot 3.1 with Java 17. It serves as a valuable learning resource for developers interested in understanding distributed tracing in microservice-based applications. If you have any questions or suggestions, feel free to contribute or reach out to the project maintainers. Happy tracing!
+The Insurance Service project is a demo application illustrating the implementation of distributed tracing using
+OpenTelemetry in Spring Boot 3.1 with Java 17. It serves as a valuable learning resource for developers interested in
+understanding distributed tracing in microservice-based applications. If you have any questions or suggestions, feel
+free to contribute or reach out to the project maintainers. Happy tracing!

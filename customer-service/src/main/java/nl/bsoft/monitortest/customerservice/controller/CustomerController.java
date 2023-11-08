@@ -2,9 +2,10 @@ package nl.bsoft.monitortest.customerservice.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.bsoft.monitortest.customerservice.model.CustomerPojo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/")
 public class CustomerController {
-    private RestTemplate restTemplate;
-    private static final String BASE_URL
-            = "http://localhost:8090/";
 
+    @Value("${nl.bsoft.insuranceurl}")
+    private String BASE_INSURANCE_URL;
+
+    @Value("${nl.bsoft.informurl}")
+    private String BASE_INFORM_URL;
+    private RestTemplate restTemplate;
     @Value("${spring.application.name}")
     private String applicationName;
 
@@ -35,10 +39,20 @@ public class CustomerController {
 
         log.info("Incoming request at {} for request customer/info for customer: {} ", applicationName, customerId);
         Map<String, Integer> params = Collections.singletonMap("id", customerId);
-        String policyId = restTemplate.getForObject(BASE_URL+ "policy?id={id}", String.class, params);
-        String claimId = restTemplate.getForObject(BASE_URL+ "claim?id={id}", String.class, params);
-        CustomerPojo customer = new CustomerPojo(customerId, policyId,claimId);
-        return ResponseEntity.ok(customer);
+        String policyId = restTemplate.getForObject(BASE_INSURANCE_URL + "policy?id={id}", String.class, params);
+        log.info("Recevied policyId: {} for customer: {}", policyId, customerId);
+        String claimId = restTemplate.getForObject(BASE_INSURANCE_URL + "claim?id={id}", String.class, params);
+        log.info("Recevied claimId: {} for customer: {}", claimId, customerId);
+        CustomerPojo customer = new CustomerPojo(customerId, policyId, claimId);
+
+        String url = BASE_INFORM_URL + customerId.toString();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        HttpEntity<String> request =
+                new HttpEntity<String>(customer.toString(), headers);
+        String message = restTemplate.postForObject(url, request, String.class);
+        log.info("Received message: {}", message);
+        return ResponseEntity.ok(message);
     }
 
 }

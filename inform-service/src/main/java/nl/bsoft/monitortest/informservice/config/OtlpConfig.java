@@ -1,4 +1,4 @@
-package nl.bsoft.monitortest.customerservice.config;
+package nl.bsoft.monitortest.informservice.config;
 
 import io.opentelemetry.exporter.otlp.http.trace.OtlpHttpSpanExporter;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class OtlpConfiguration {
+public class OtlpConfig {
 
     @Bean
     OtlpHttpSpanExporter otlpHttpSpanExporter(@Value("${tracing.url}") String url) {
